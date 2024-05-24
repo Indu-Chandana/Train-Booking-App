@@ -2,19 +2,60 @@ import React from "react";
 import { FlatList, Image, Text, View } from "react-native";
 import Svg, { Path } from 'react-native-svg'
 import { constants, COLORS, SIZES, FONTS } from "../../constants";
+import { TextButton } from "../../components";
 
 const Onboarding = () => {
 
   // SVG
   const controlX = SIZES.width / 2; // control center point's x coordinate
 
+  // FlatList
+  const currentIndex = React.useRef(0)
+  const screenFlatListRef = React.useRef()
+  const titleFlatListRef = React.useRef()
+
+  // when we reach last screen, needed to change the button label.
+  const [isLastItem, setIsLastItem] = React.useState(false)
+
+  const handleNextPress = () => {
+    if (currentIndex.current < constants.onboarding_screens.length - 1) {
+      currentIndex.current += 1
+      const nextIndex = currentIndex.current
+      const offset = nextIndex * SIZES.width
+
+      screenFlatListRef?.current?.scrollToOffset({
+        offset,
+        animated: true
+      })
+
+      titleFlatListRef?.current?.scrollToOffset({
+        offset,
+        animated: true
+      })
+
+      if (currentIndex.current === constants.onboarding_screens.length - 1) {
+        setIsLastItem(true)
+      }
+
+      // screenFlatListRef?.current?.scrollToIndex({
+      //   index: currentIndex.current,
+      //   animated: true
+      // })
+      // titleFlatListRef?.current?.scrollToIndex({
+      //   index: currentIndex.current,
+      //   animated: true
+      // })
+    }
+  }
+
   return (
     <View style={{ flex: 1 }}>
       <View style={{ flex: 2, backgroundColor: COLORS.primary50 }}>
         <FlatList
+          ref={screenFlatListRef}
           horizontal
           pagingEnabled
-          scrollEnabled
+          scrollEnabled={false}
           snapToAlignment="center"
           snapToInterval={SIZES.width}
           decelerationRate="fast"
@@ -53,9 +94,10 @@ const Onboarding = () => {
 
         {/* Title and Description */}
         <FlatList
+          ref={titleFlatListRef}
           horizontal
           pagingEnabled
-          scrollEnabled
+          scrollEnabled={false}
           snapToAlignment="center"
           snapToInterval={SIZES.width}
           decelerationRate="fast"
@@ -82,6 +124,13 @@ const Onboarding = () => {
               </View>
             )
           }}
+        />
+
+        {/* Text Button */}
+        <TextButton
+          label={isLastItem ? "Get Started" : "Next"}
+          contentContainerStyle={{ marginHorizontal: SIZES.padding, marginBottom: SIZES.padding }}
+          onPress={handleNextPress}
         />
       </View>
     </View>
