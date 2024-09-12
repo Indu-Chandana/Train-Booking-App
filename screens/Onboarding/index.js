@@ -4,7 +4,7 @@ import Svg, { Path } from 'react-native-svg'
 import { constants, COLORS, SIZES, FONTS } from "../../constants";
 import { TextButton } from "../../components";
 
-const Onboarding = () => {
+const Onboarding = ({ navigation }) => {
 
   // SVG
   const controlX = SIZES.width / 2; // control center point's x coordinate
@@ -45,6 +45,8 @@ const Onboarding = () => {
       //   index: currentIndex.current,
       //   animated: true
       // })
+    } else {
+      navigation.navigate("Welcome")
     }
   }
 

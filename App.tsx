@@ -3,7 +3,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from '@react-navigation/native';
 
 import {
-    Onboarding
+    Onboarding,
+    Welcome
 } from "./screens";
 
 const Stack = createStackNavigator();
@@ -15,10 +16,11 @@ const App = () => {
                 screenOptions={{
                     headerShown: false
                 }}
-                initialRouteName={'Welcome'}
+                initialRouteName={'Onboarding'}
             >
                 {/* Onboarding */}
                 <Stack.Screen name="Onboarding" component={Onboarding} />
+                <Stack.Screen name="Welcome" component={Welcome} />
             </Stack.Navigator>
         </NavigationContainer>
     )
