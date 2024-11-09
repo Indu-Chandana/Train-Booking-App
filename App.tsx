@@ -6,23 +6,26 @@ import {
     Onboarding,
     Welcome
 } from "./screens";
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const Stack = createStackNavigator();
 
 const App = () => {
     return (
-        <NavigationContainer>
-            <Stack.Navigator
-                screenOptions={{
-                    headerShown: false
-                }}
-                initialRouteName={'Onboarding'}
-            >
-                {/* Onboarding */}
-                <Stack.Screen name="Onboarding" component={Onboarding} />
-                <Stack.Screen name="Welcome" component={Welcome} />
-            </Stack.Navigator>
-        </NavigationContainer>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+            <NavigationContainer>
+                <Stack.Navigator
+                    screenOptions={{
+                        headerShown: false
+                    }}
+                    initialRouteName={'Onboarding'}
+                >
+                    {/* Onboarding */}
+                    <Stack.Screen name="Onboarding" component={Onboarding} />
+                    <Stack.Screen name="Welcome" component={Welcome} />
+                </Stack.Navigator>
+            </NavigationContainer>
+        </GestureHandlerRootView>
     )
 }
 
