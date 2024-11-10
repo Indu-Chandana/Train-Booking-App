@@ -119,7 +119,7 @@ export default Welcome
 // import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 
 // const Welcome = () => {
-//     // ref
+//     // ref 
 //     const bottomSheetRef = useRef(null);
 
 //     // callbacks
