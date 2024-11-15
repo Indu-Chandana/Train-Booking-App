@@ -1,9 +1,19 @@
 import { View, Text, Image } from 'react-native'
 import React from 'react'
-import { COLORS, FONTS, icons, images, SIZES } from '../../constants'
-import { IconTextButton, TextButton } from '../../components'
+import { COLORS, constants, FONTS, icons, images, SIZES } from '../../constants'
+import { IconTextButton, TextButton, AuthModal } from '../../components'
 
 const Welcome = () => {
+
+    const bottomSheetModalRef = React.useRef(null)
+
+    const showModal = React.useCallback((screen) => {
+        bottomSheetModalRef.current?.present();
+    }, [])
+
+    const hideModal = React.useCallback(() => {
+        bottomSheetModalRef.current.dismiss()
+    }, [])
 
     function renderHeaderImage() {
         return (
@@ -45,7 +55,7 @@ const Welcome = () => {
                             borderColor: COLORS.primary500,
                             backgroundColor: COLORS.primary500
                         }}
-                        onPress={() => { }}
+                        onPress={() => showModal(constants.login)}
                     />
 
                     {/* Apple */}
@@ -105,6 +115,12 @@ const Welcome = () => {
 
                 {/* Login Details */}
                 {renderLoginDetails()}
+
+
+                <AuthModal
+                    bottomSheetModalRef={bottomSheetModalRef}
+                    hideModal={hideModal}
+                />
             </View>
         </View>
     )

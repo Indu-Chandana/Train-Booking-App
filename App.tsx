@@ -7,24 +7,27 @@ import {
     Welcome
 } from "./screens";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 
 const Stack = createStackNavigator();
 
 const App = () => {
     return (
         <GestureHandlerRootView style={{ flex: 1 }}>
-            <NavigationContainer>
-                <Stack.Navigator
-                    screenOptions={{
-                        headerShown: false
-                    }}
-                    initialRouteName={'Onboarding'}
-                >
-                    {/* Onboarding */}
-                    <Stack.Screen name="Onboarding" component={Onboarding} />
-                    <Stack.Screen name="Welcome" component={Welcome} />
-                </Stack.Navigator>
-            </NavigationContainer>
+            <BottomSheetModalProvider>
+                <NavigationContainer>
+                    <Stack.Navigator
+                        screenOptions={{
+                            headerShown: false
+                        }}
+                        initialRouteName={'Onboarding'}
+                    >
+                        {/* Onboarding */}
+                        <Stack.Screen name="Onboarding" component={Onboarding} />
+                        <Stack.Screen name="Welcome" component={Welcome} />
+                    </Stack.Navigator>
+                </NavigationContainer>
+            </BottomSheetModalProvider>
         </GestureHandlerRootView>
     )
 }
